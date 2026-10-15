@@ -1,46 +1,59 @@
 package com.sai.student_service.Service;
 
+import com.sai.student_service.Dto.StudentRequest;
+import com.sai.student_service.Dto.StudentResponse;
 import com.sai.student_service.Entity.Student;
+import com.sai.student_service.Mapper.StudentMapper;
 import com.sai.student_service.Repository.StudentRepository;
 import com.sai.student_service.Service.Interface.IStudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class StudentService implements IStudentService {
 
     private final StudentRepository studentRepository;
+    private final StudentMapper studentMapper;
 
     @Override
-    public Student createStudent(Student student) {
-        return studentRepository.save(student);
+    public StudentResponse createStudent(StudentRequest request) {
+        Student student = studentMapper.toEntity(request);
+        Student saved = studentRepository.save(student);
+        return studentMapper.toResponse(saved);
     }
 
     @Override
-    public List<Student> getAllStudent() {
-        return studentRepository.findAll();
+    public List<StudentResponse> getAllStudent() {
+        return studentRepository.findAll()
+                .stream()
+                .map(studentMapper::toResponse)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Student getStudentById(Long id) {
-        return studentRepository.findById(id)
+    public StudentResponse getStudentById(Long id) {
+        Student student = studentRepository.findById(id)
                 .orElseThrow();
+        return studentMapper.toResponse(student);
     }
 
     @Override
-    public Student updateStudent(Long id, Student student) {
-        Student update = studentRepository.findById(id)
+    public StudentResponse updateStudent(Long id, StudentRequest student) {
+        studentRepository.findById(id)
                 .orElseThrow();
 
-        update = Student.builder()
+        Student update = Student.builder()
                 .name(student.getName())
                 .lastName(student.getLastName())
                 .email(student.getEmail())
+                .age(student.getAge())
+                .grade(student.getGrade())
                 .build();
-        return studentRepository.save(update);
+        return studentMapper.toResponse(studentRepository.save(update));
     }
 
     @Override
