@@ -49,8 +49,8 @@ public class StudentService implements IStudentService {
         Student update = Student.builder()
                 .name(student.getName())
                 .lastName(student.getLastName())
-                .email(student.getEmail())
-                .age(student.getAge())
+                .email(student.getEmail()) //validar la existencia de email
+                .age(student.getAge()) //si existe no actualizar
                 .grade(student.getGrade())
                 .build();
         return studentMapper.toResponse(studentRepository.save(update));

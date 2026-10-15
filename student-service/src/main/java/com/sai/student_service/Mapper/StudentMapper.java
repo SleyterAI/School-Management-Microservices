@@ -3,7 +3,9 @@ package com.sai.student_service.Mapper;
 import com.sai.student_service.Dto.StudentRequest;
 import com.sai.student_service.Dto.StudentResponse;
 import com.sai.student_service.Entity.Student;
+import org.springframework.stereotype.Component;
 
+@Component
 public class StudentMapper {
     //request -> entity to DB
     public Student toEntity(StudentRequest request){
