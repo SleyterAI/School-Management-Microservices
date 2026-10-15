@@ -1,0 +1,2 @@
+CREATE DATABASE IF NOT EXISTS school_management_microservices;
+USE school_management_microservices;
