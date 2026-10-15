@@ -14,4 +14,4 @@ docker compose down
 ```
 
 you may have deleting the existing volumes if you are encountering
-issues 
+issues  
