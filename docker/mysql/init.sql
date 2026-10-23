@@ -1,2 +1,2 @@
-CREATE DATABASE IF NOT EXISTS school_management_microservices;
-USE school_management_microservices;
+CREATE DATABASE IF NOT EXISTS student_db;
+USE student_db;
