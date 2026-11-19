@@ -8,6 +8,7 @@ import lombok.*;
 @Builder
 public class StudentResponse {
 
+    private Long id;
     private String name;
     private String lastName;
     private String email;
