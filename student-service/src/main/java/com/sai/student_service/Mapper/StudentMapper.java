@@ -21,6 +21,7 @@ public class StudentMapper {
     // entity from DB -> response
     public StudentResponse toResponse(Student student){
         return StudentResponse.builder()
+                .id(student.getId())
                 .name(student.getName())
                 .lastName(student.getLastName())
                 .email(student.getEmail())
